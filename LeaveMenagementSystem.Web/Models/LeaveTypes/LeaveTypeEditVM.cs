@@ -2,16 +2,18 @@
 
 namespace LeaveMenagementSystem.Web.Models.LeaveTypes
 {
-    public class LeaveTypeCreateVM
+    public class LeaveTypeEditVM
     {
+        public int Id { get; set; }
+
         [Required]
-        [Length(4,150, ErrorMessage ="You have violated the length requrements")]
+        [Length(4, 150, ErrorMessage = "You have violated the length requrements")]
         public string Name { get; set; } = string.Empty;
 
         [Required]
         [Range(1, 90)]
-        public int NumberOfDays { get; set; }   
-        
+        public int NumberOfDays { get; set; }
+
     }
            
 }
