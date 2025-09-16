@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LeaveMenagementSystem.Web.MappingProfile;
 
 namespace LeaveMenagementSystem.Web.Controllers
 {
@@ -28,7 +29,7 @@ namespace LeaveMenagementSystem.Web.Controllers
         {
 
             var data = await _context.LeaveTypes.ToListAsync();
-            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, IndexVM>();           
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, LeaveTypeReadOnlyVM>();           
             var viewData =  data.Select(x => mapper.Map(x)).ToList();
            
 
@@ -52,8 +53,10 @@ namespace LeaveMenagementSystem.Web.Controllers
             {
                 return NotFound();
             }
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, LeaveTypeReadOnlyVM>();
+            var viewData = mapper.Map(leaveType);
 
-            return View(leaveType);
+            return View(viewData);
         }
 
         // GET: LeaveTypes/Create
@@ -67,15 +70,17 @@ namespace LeaveMenagementSystem.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,NumberOfDays")] LeaveType leaveType)
+        public async Task<IActionResult> Create(LeaveTypeCreateVM leaveTypeCreate)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(leaveType);
+
+                var leaveType = EmitMapperConfig.LeaveTypeToIndexVMMapper.Map(leaveTypeCreate);
+                _context.Add(leaveTypeCreate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(leaveType);
+            return View(leaveTypeCreate);
         }
 
         // GET: LeaveTypes/Edit/5

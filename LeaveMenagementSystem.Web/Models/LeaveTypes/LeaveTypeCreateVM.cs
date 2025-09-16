@@ -1,9 +1,9 @@
 ﻿namespace LeaveMenagementSystem.Web.Models.LeaveTypes
 {
-    public class LeaveTypeReadOnlyVM
+    public class LeaveTypeCreateVM
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int NumberOfDays { get; set; }
+        public int NumberOfDays { get; set; }   
+        
     }
 }

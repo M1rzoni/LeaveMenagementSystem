@@ -6,7 +6,9 @@ namespace LeaveMenagementSystem.Web.MappingProfile
 {
     public static class EmitMapperConfig
     {
-        public static ObjectsMapper<LeaveType, IndexVM> LeaveTypeToIndexVmMapper =
-            ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, IndexVM>();
+        public static ObjectsMapper<LeaveType, LeaveTypeReadOnlyVM> LeaveTypeToIndexVmMapper =
+            ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, LeaveTypeReadOnlyVM>();
+
+        public static ObjectsMapper<LeaveTypeCreateVM, LeaveType> LeaveTypeToIndexVMMapper = ObjectMapperManager.DefaultInstance.GetMapper<LeaveTypeCreateVM, LeaveType>();
     }
 }

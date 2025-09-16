@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddSingleton(provider =>
 {
-    return ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, IndexVM>();
+    return ObjectMapperManager.DefaultInstance.GetMapper<LeaveType, LeaveTypeReadOnlyVM>();
 });
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
