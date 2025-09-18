@@ -2,9 +2,9 @@
 
 namespace LeaveMenagementSystem.Web.Models.LeaveTypes
 {
-    public class LeaveTypeEditVM
+    public class LeaveTypeEditVM : BaseLeaveTypeVM
     {
-        public int Id { get; set; }
+    
 
         [Required]
         [Length(4, 150, ErrorMessage = "You have violated the length requrements")]
@@ -12,6 +12,7 @@ namespace LeaveMenagementSystem.Web.Models.LeaveTypes
 
         [Required]
         [Range(1, 90)]
+        [Display(Name = "Maximum Alloaciton of Days")]
         public int NumberOfDays { get; set; }
 
     }
